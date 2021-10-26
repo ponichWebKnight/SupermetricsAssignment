@@ -1,0 +1,174 @@
+.App {
+  text-align: center;
+}
+
+.center-container {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login-form {
+  border: 1px solid #000;
+  border-radius: 8px;
+  min-width: 400px;
+  padding: 40px;
+  text-align: initial;
+
+  input[type="text"] {
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 2px;
+    width: 100%;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
+.dashboard {
+  display: flex;
+
+  .users-search {
+    padding: 10px;
+    text-align: left;
+
+    input {
+      line-height: 25px;
+    }
+  }
+ 
+  .users-list {
+    flex: 1 auto;
+    padding: 10px;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        border: 3px solid #000;
+        margin-bottom: 20px;
+        min-width: 200px;
+        text-align: initial;
+        overflow: hidden;
+        padding: 5px;
+
+        span {
+          display: inline-flex;
+          line-height: 35px;
+        }
+
+        .post-counter {
+          align-items: center;
+          justify-content: center;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          background-color: #000;
+          color: #fff;
+          float: right;
+        }
+      }
+    }
+  }
+
+  .posts {
+    flex: 1 100%;
+    padding: 10px;
+
+    .posts-filter {
+      overflow: hidden;
+      padding-bottom: 20px;
+
+      .posts-order {
+        float: left;
+
+        &__button {
+          background-color: #000;
+          color: #fff;
+          height: 30px;
+          width: 35px;
+        }
+
+        &__button {
+          &.mr-10 {
+            margin-right: 10px;
+          }
+        }
+      }
+  
+      input {
+        float: right;
+        line-height: 25px;
+      }
+    }
+  
+    .user-posts {
+  
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+  
+        li {
+          border: 3px solid #000;
+          margin-bottom: 20px;
+          overflow: hidden;
+          padding: 5px;
+          text-align: initial;
+        }
+      }
+    }
+  }
+}
+
+.throbber {
+  display: inline-block;
+  height: 80px;
+  position: relative;
+  width: 80px;
+
+  div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid beige;
+    border-radius: 50%;
+    animation: throbber 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: beige transparent transparent transparent;
+
+    &:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+  }
+}
+
+@keyframes throbber {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
