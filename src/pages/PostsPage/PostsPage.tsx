@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
+import { useQuery } from "../../hooks/useQuery";
 import { getPosts, setSelectedUser } from "../../state/action-creators/postsCreators";
 import { RootState } from '../../state/reducers/index';
 import Throbber from '../../components/Throbber';
@@ -9,7 +10,8 @@ import UserPosts from "./components/UserPosts";
 
 const PostsPage: React.FC = (): JSX.Element => {
   const history = useHistory();
-  const { userId } = useParams<{userId?: string}>();
+  const queryParams: URLSearchParams = useQuery();
+  const userId = queryParams.get('userId');
   const dispatch = useDispatch();
   const { isLoading, error} = useSelector((state: RootState) => state.posts);
   const { loginData } = useSelector((state: RootState) => state.login);
@@ -21,14 +23,16 @@ const PostsPage: React.FC = (): JSX.Element => {
     if (token) {
       dispatch(getPosts(token, 1));
 
-      if (userId) {
-        dispatch(setSelectedUser(userId));
-      }
     } else {
       history.push('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    dispatch(setSelectedUser(userId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
 
   useEffect(() => {
     if (error) {

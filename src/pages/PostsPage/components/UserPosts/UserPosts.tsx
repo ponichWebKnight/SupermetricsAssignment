@@ -12,6 +12,7 @@ const UserPosts: React.FC = (): JSX.Element => {
   let currentPosts: NormalizedPost[] = [];
 
   if (state.posts.selectedUser) {
+    console.log(state.posts.selectedUser);
     let selectedUserIndex: number = userPosts.findIndex((user) => {
       return user.from_id === state.posts.selectedUser
     });

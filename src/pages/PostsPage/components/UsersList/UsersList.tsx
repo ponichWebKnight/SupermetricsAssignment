@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectedUser } from "../../../../state/action-creators/postsCreators";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { useQuery } from "../../../../hooks/useQuery";
 import { RootState } from "../../../../state/reducers";
 import { selectNormalizedPostsData } from '../../../../state/reducers'
 import { UserPosts } from "../../../../state/types/postsTypes";
@@ -8,15 +9,17 @@ import { UserPosts } from "../../../../state/types/postsTypes";
 const UsersList: React.FC = (): JSX.Element => {
   const [searchString, setSearchString] = useState('');
   const state = useSelector((state: RootState) => state)
+  const history = useHistory();
+  const queryParams: URLSearchParams = useQuery();
+  const userId = queryParams.get('userId');
   let users: UserPosts[] = selectNormalizedPostsData(state);
   let currentUsers: UserPosts[] = users;
-  const dispatch = useDispatch();
 
   const handleUserClick = (e: React.MouseEvent<HTMLLIElement>): void => {
     const selectedUserId: string | null = e.currentTarget.dataset.userId || null;
 
     if (selectedUserId) {
-      dispatch(setSelectedUser(selectedUserId));
+      history.push('/posts?userId=' + selectedUserId);
     }
   };
 
@@ -40,7 +43,8 @@ const UsersList: React.FC = (): JSX.Element => {
           {currentUsers && currentUsers.map((user) => 
             <li key={user.from_id}
               data-user-id={user.from_id}
-              onClick={handleUserClick}>
+              onClick={handleUserClick}
+              className={(userId && userId === user.from_id) ? 'active' : ''}>
               <span>{user.from_name}</span>
               <span className="post-counter">{user.posts.length}</span>
             </li>

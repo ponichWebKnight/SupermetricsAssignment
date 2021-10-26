@@ -23,7 +23,7 @@ interface GetPostsDataErrorAction {
 
 interface SetSelectedUserAction {
   type: PostsActionsTypes.SET_SELECTED_USER;
-  payload: string;
+  payload: string | null;
 }
 
 export type PostsAction = GetPostsDataAction | GetPostsDataSuccessAction | GetPostsDataErrorAction | SetSelectedUserAction;

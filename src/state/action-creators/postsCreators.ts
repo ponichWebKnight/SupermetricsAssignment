@@ -29,7 +29,7 @@ export const getPosts = (token: string, pageIndex: number) => {
   }
 }
 
-export const setSelectedUser = (user_id: string) => {
+export const setSelectedUser = (user_id: string | null) => {
   return (dispatch: Dispatch<PostsAction>) => {
     dispatch({
       type: PostsActionsTypes.SET_SELECTED_USER,
