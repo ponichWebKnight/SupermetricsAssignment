@@ -24,5 +24,5 @@ Links example:
 Some of the features could be implemented in a more proper way:
 - Login Form Validation
 - Redirection to Login Page from Post page
-- Redux refactore (action creators and reducers can be changed to createSlice function)
+- Redux refactor (action creators and reducers can be changed to createSlice function)
 - Search behavior for Users
