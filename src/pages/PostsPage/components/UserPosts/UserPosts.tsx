@@ -4,7 +4,7 @@ import { RootState } from '../../../../state/reducers';
 import { selectNormalizedPostsData } from '../../../../state/reducers'
 import { UserPosts as Posts, NormalizedPost } from "../../../../state/types/postsTypes";
 
-const UserPosts: React.FC = (): JSX.Element | null => {
+const UserPosts: React.FC = (): JSX.Element => {
   const [searchString, setSearchString] = useState<string>('');
   const [orderType, setOrderType] = useState<string>('asc');
   const state: RootState = useSelector((state: RootState) => state)
@@ -35,22 +35,24 @@ const UserPosts: React.FC = (): JSX.Element | null => {
     }
   }
 
-  if (currentPosts && currentPosts.length) {
-    return (
-      <section className="posts">
-        <div className="posts-filter">
+  return (
+    <section className="posts">
+      <div className="posts-filter">
+        {(currentPosts && currentPosts.length) ? (
           <div className="posts-order">
             <button className="posts-order__button mr-10" onClick={(e) => setOrderType('asc')}>&#8679;</button>
             <button className="posts-order__button" onClick={(e) => setOrderType('desc')}>&#8681;</button>
           </div>
-          <div className="posts-search">
-            <input type="text"
-              name="search"
-              placeholder="Search"
-              value={searchString}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setSearchString(e.target.value)} />
-          </div>
+        ) : null}
+        <div className="posts-search">
+          <input type="text"
+            name="search"
+            placeholder="Search"
+            value={searchString}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setSearchString(e.target.value)} />
         </div>
+      </div>
+      {(currentPosts && currentPosts.length) ? (
         <div className="user-posts">
           <ul>
             {currentPosts && currentPosts.length && currentPosts.map((currentPost) => 
@@ -61,11 +63,9 @@ const UserPosts: React.FC = (): JSX.Element | null => {
             )}
           </ul>
         </div>
-      </section>
-    )
-  }
-
-  return null;
+      ) : null}
+    </section>
+  )
 };
 
 export default UserPosts;
